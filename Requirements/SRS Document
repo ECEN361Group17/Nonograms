@@ -1,0 +1,194 @@
+SOFTWARE REQUIREMENTS SPECIFICATION
+
+NONOGRAMS
+
+Authored By:  Group 17
+Alex Enersen, Ben Salitros, John Schoen,
+Kyle Stolle, Jingchen Wang
+
+University of Nebraska - Lincoln
+CSCE 361
+Spring 2018
+January 19, 2018
+
+Date: 2/5/18
+Changes: Initial Document
+Version: 1.0
+
+Contents
+1.	Introduction	1
+1.1	Purpose	1
+1.2	Scope	1
+1.3 Definitions, acronyms, and abbreviations	1
+1.4 Overview	2
+2.  Overall Description	2
+2.1 Product perspective	2
+2.1.1 System interfaces	2
+2.1.2 User interfaces	2
+2.1.3 Hardware interfaces	2
+2.1.4 Software interfaces	2
+2.1.5 Communication interfaces	3
+2.1.6 Memory	3
+2.1.7 Operations	3
+2.1.8 Site adaptation requirements	3
+2.2 Product functions	3
+2.3 User characteristics	3
+2.4 Constraints	3
+2.5 Assumptions and dependencies	3
+3.	Specific Requirements	4
+3.1	External interface requirements	4
+3.2	Functions	4
+3.2.1	Phase 1	4
+3.2.2	Phase 2	4
+3.2.3	Future development	5
+3.3	Performance requirements	5
+3.4	Logical database requirements	5
+3.5	Design constraints	5
+3.6	Software system attributes	5
+3.6.1	Reliability	5
+3.6.2	Availability	5
+3.6.3	Security	6
+3.6.4	Maintainability	6
+3.6.5	Portability	6
+
+
+
+
+
+
+Introduction
+Purpose
+This document serves as an overview of the features and requirements of a Nonogram puzzle application.
+
+Scope
+The scope of this project will be a Nonogram puzzle game application. Nonograms are a type of logic puzzle consisting of a grid in which cells must be selected according to numbers given at the top of the columns and side of the rows.  Typically the selected cells form an image when the puzzle has been solved.  The number clues are listed in integer multiples with the individual numbers indicating the number of connected cells in the row or column and additional numbers indicating that at least one blank cell must separate cell groups. The game will be written in Java which will allow it to be used on any device (PC, Mac, and with slight a modification, Android). (see Figure 1 for an example puzzle).
+
+
+Figure 1:  An example Nonogram puzzle (source: Wikipedia)
+	1.3 Definitions, acronyms, and abbreviations
+
+Java Runtime Environment – A platform for running applications written in the Java coding language
+JRE – Java Runtime Environment
+GUI – Graphical user interface
+Swing – a Java based API designed to utilize the look and feel of the native operating system
+CSV – a plain text file with comma separated values
+
+1.4 Overview
+The remainder of this document will detail specific attributes of the Nonogram application.  The overall description will provide background on the application requirements.  Specific requirements of the application will then be reviewed.
+
+2.  Overall Description
+
+2.1 Product perspective
+The Nonogram puzzle game will be a self-contained application.  Outside of a machine with an operating system capable of running a Java-based application and the required JRE, it will be an independent system.  A subsequent port of the application to run on Android devices will not require the JRE as Android has its own integrated runtime environment.
+
+2.1.1 System interfaces
+The application will not require outside systems to operate.
+
+2.1.2 User interfaces
+The game will be a GUI based application for users to interact with. The user will interact with the application in the same manner they would other GUI applications on their device (i.e. mouse, keyboard, touchscreen) in order to manipulate objects on the screen.  The application will have a clickable menu screen that can be navigated, and the puzzles will be clickable to select spaces in the puzzle grid.  A keyboard (either virtual or hardware) may be required if the user wishes to add their name to a high score list. The Java Swing API will be used to design the interface, as it utilizes the look and feel of the native operating system and allows for objects to be placed in such a way to automatically adapt to user selected window sizing and placement.  A subsequent port of the application for Android based devices will run full screen by default and will not be resizable.  
+
+2.1.3 Hardware interfaces
+The application will require typical hardware for interacting with GUI based applications (i.e. mouse, keyboard, touchscreen).  No additional hardware will be required.
+
+2.1.4 Software interfaces
+The application will be written in the Java coding language, and will require the JRE in order to operate on personal computing devices. The JRE is a virtual runtime environment that operates on top of an operating system to compile and run applications written in the Java coding language.  The JRE is available for Windows, Linux, and macOS.  The Android port of the application will not require any additional software interfaces.
+
+2.1.5 Communication interfaces
+The application will be single player and run locally on the user machine, requiring no additional communication interfaces.
+
+2.1.6 Memory
+The application will have a visually simple, grid based design, so graphical components will require very light memory resources.  The puzzles can be represented by multi-dimensional arrays and stored in light-weight CSV files.  The program itself will not require any complex computation or storage requirements and thus will require only minimal resources to operate.  If the machine is capable of running any Java-based application, it should be able to run this application.
+
+2.1.7 Operations
+The initial design of this application will have only a single mode of operation, which will be running the game.  As the user completes puzzles, new puzzles will be presented until the user exits the application.  Subsequent designs may include a method of choosing puzzle difficulty and score tracking.
+
+2.1.8 Site adaptation requirements
+There are no site adaptation requirements.
+
+2.2 Product functions
+The primary function of the application is to provide the user with a variety of Nonograms puzzles that can be solved. To achieve this, it will also have functions to load puzzles, create puzzles, and check puzzle attempts against the solution.
+
+2.3 User characteristics
+The application is designed for puzzle aficionados of all age groups and backgrounds.  While the application will provide puzzles of varying levels of difficulty, Nonograms are logic puzzles with a relatively simple rule set.  If the user can count and use a computer system, they should be able to understand the procedures of the game and be able to play it. All other relevant skills can be learned and developed as the user plays the game. Subsequent designs of the game may include a brief visual primer on how to play the game.
+
+2.4 Constraints
+The only constraint on the initial design of the application will be that the system has and is capable of running the JRE and a GUI based application.  A subsequent Android port of the application will be designed for a portrait screen layout.   Since the game itself has minimal graphic intensity, it should function serviceably at multiple resolutions.
+
+2.5 Assumptions and dependencies
+The initial design assumes that the user has the JRE installed and working on their computer.  The JRE is a multiplatform environment and can be run on all major operating systems, but will need to be installed separately before the application can be used.  Since the application is dependent on the JRE to run, the application will simply not be able to execute without it.  A subsequent Android port of the application will only require that the device supports the Android operating system.
+
+3. Specific Requirements
+
+3.1 External interface requirements
+This application does not require any external interfaces.
+
+3.2 Functions
+
+3.2.1 Phase 1
+3.2.1.1 Application launch
+When the application is launched, it should open with a start screen.
+ The start menu should present the user with an option to choose the level of difficulty or game model.
+3.2.1.2 Puzzle interface
+The puzzle will be presented as an empty n x m grid of cells centered in the middle of the application window.  Above the columns and to the sides of the rows will be numbers indicating the grouping of adjacent cells that form the solution in that row or column.  Additional numbers indicate that there must be at least one empty cell between groupings (an example can be seen in Figure 1).
+The user interacts with the puzzle by clicking on the cells in the grid.  When a cell is clicked on it becomes filled (indicated by coloring the cell).  A cell can also be deselected by again clicking on a previously filled cell.
+3.2.1.3 Game play
+The user can select or deselect any cell they wish until the puzzle is solved.
+When a solution to a puzzle has been found, a dialog will inform the user that the puzzle has been solved.  This dialog will have two selectable options: replay or new puzzle.
+3.2.1.4 Puzzle design
+Puzzles will be designed to form a simple image with the puzzle cells representing pixels of the image.
+The lists of cells that form completed puzzles will be stored in CSV files accessible to the application, which will be parsed as part of a puzzle loading function.
+
+3.2.2 Phase 2
+3.2.2.1 Score keeping
+A play clock will be introduced for timing how long it takes a user to complete a puzzle.
+A high score record will be kept and displayed for individuals puzzles giving the user incentive to beat the previously recorded fastest time.
+3.2.2.2 Puzzle difficulty
+The application should be able to compute a level of difficulty for each puzzle.
+Puzzle difficulty should increase as the user completes puzzles.
+3.2.2.3 Start menu
+When the application is launched, it should open with a start screen.
+The start menu should present the user with an option to choose the level of difficulty.
+The start menu should offer a primer on how to play the game.
+3.2.2.4 Mobile port
+The Java-based application will be ported to the Android platform.
+A GUI layout will be optimized for mobile devices.
+
+3.2.3 Future development
+3.2.3.1 Puzzle creator
+A side loaded application would allow for the user to load an image and have the system render a puzzle from the image.
+
+3.3 Performance requirements
+While there are no specific performance metrics required, the application should run objectively smoothly without noticeable degradation to other machine tasks.
+
+3.4 Logical database requirements
+In lieu of a database, the application will maintain score data in the puzzle CSV file. As data sizes for puzzles and score keeping are minimal, a database will not be required. Data will be saved and processed via a buffered reader/writer.
+
+3.5 Design constraints
+The initial application should be usable yet not interfere with any other machine system processes.  The subsequent Android port will be constrained by screen size, and thus the GUI will need to be adjusted accordingly to be usable in a small touchscreen form factor.
+
+3.6 Software system attributes
+3.6.1 Reliability
+3.6.1.1 Phase One
+3.6.1.1.1         The system will load and operate as expected without any random errors or exits.
+3.6.1.2 Phase Two
+3.6.1.2.1         The system will incorporate new features without any errors.
+3.6.1.2.2         The system will adjust for mobile devices and run without any errors
+
+3.6.2 Availability
+	The application should be completely available and subservient to any system requests such as force close or restart. 
+	3.6.2.1 Force quit/restart  
+3.6.2.1.1         In the event of a force quit/restart, the system will back up game progress.
+3.6.2.1.2         Backups for game progress will be performed every 30 seconds by the system.
+
+3.6.3 Security
+The system will not access any personal information stored on the user’s device, nor will it encrypt any information since the system does not require a username or password.
+
+3.6.4 Maintainability
+The application code should have a well-documented, modular, object-oriented design to allow for easy development between phases and future development and improvement.  The application should not depend on any deprecated elements in the Java platform.
+
+3.6.5	Portability
+3.6.5.1	Java
+The Java platform is a proven portable language available for multiple platforms.  Since Java uses its own multi-platform runtime environment to compile and run the code, there is no additional work or recompilation of executables required to operate in another operating system.
+3.6.5.2	Android
+While there is no JRE directly available to Android, porting Java code to the Android   operating system is still relatively easy using an integrated development environment.
+
