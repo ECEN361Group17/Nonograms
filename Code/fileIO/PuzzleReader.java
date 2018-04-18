@@ -20,6 +20,7 @@ public class PuzzleReader {
 	private int columnCurtainSize;
 	private int rowCurtainSize;
 	private long bestTime;
+	private int difficulty;
 	
 	public PuzzleReader(String fileLocation)  {
 		this.fileLocation = fileLocation;
@@ -34,9 +35,11 @@ public class PuzzleReader {
 			String line = sc.nextLine();
 			String data[] = line.split(";");
 			
-			bestTime = Long.parseLong(data[0]);
+			difficulty = Integer.parseInt(data[0]);
 			
-			String dimensions[] = data[1].split(",");
+			bestTime = Long.parseLong(data[1]);
+			
+			String dimensions[] = data[2].split(",");
 			
 			m = Integer.parseInt(dimensions[0]);
 			n = Integer.parseInt(dimensions[1]);
@@ -155,7 +158,7 @@ public class PuzzleReader {
 		 * 
 		 */
 		
-		this.grid = new Grid(m + 1, n + 1, bestTime);
+		this.grid = new Grid(m + 1, n + 1, bestTime, difficulty);
 		
 		this.gridArray.add(new ArrayList<Tile>());
 		

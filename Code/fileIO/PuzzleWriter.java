@@ -28,12 +28,13 @@ public class PuzzleWriter {
 		this.puzzleArray  = new ArrayList<ArrayList<Integer>>();
 		StringBuilder sb = new StringBuilder();
 		
-		//Format: highscore (<--this could be a date/time type...just a number for now); m; n;
+		//Format: difficulty; highscore; m; n;
 		//		  row_1, (comma separated values)
 		//		  ...,
-		//		  row_n
+		//		  row_m
 		
-		sb.append(this.grid.getBestTime()).append(";");		
+		sb.append(this.grid.getDifficulty()).append(";")
+		  .append(this.grid.getBestTime()).append(";");		
 		
 		try {
 			Scanner sc = new Scanner(new File(this.filePath));
@@ -41,7 +42,7 @@ public class PuzzleWriter {
 			String line = sc.nextLine();
 			String data[] = line.split(";");
 			
-			String dimensions[] = data[1].split(",");
+			String dimensions[] = data[2].split(",");
 			
 			this.m = Integer.parseInt(dimensions[0]);
 			this.n = Integer.parseInt(dimensions[1]);
@@ -86,8 +87,6 @@ public class PuzzleWriter {
 			}
 			sb.append(System.lineSeparator());
 		}
-		
-		//System.out.println(sb.toString());
 		
 		File file = new File(filePath);
 		

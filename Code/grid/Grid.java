@@ -13,19 +13,13 @@ public class Grid {
 	private int tileID = 0;
 	private JPanel gridPanel;
 	private Long bestTime;
+	private int difficulty;
 
-	public Long getBestTime() {
-		return bestTime;
-	}
-
-	public void setBestTime(Long bestTime) {
-		this.bestTime = bestTime;
-	}
-
-	public Grid(int m, int n, long bestTime)  {
+	public Grid(int m, int n, long bestTime, int difficulty)  {
 		this.m = m;
 		this.n = n;
 		this.bestTime = bestTime;
+		this.difficulty = difficulty;
 		
 		createGrid();
 	}
@@ -126,5 +120,20 @@ public class Grid {
 
 	public void setGridPanel(JPanel gridPanel) {
 		this.gridPanel = gridPanel;
+	}
+	
+	public int getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(int difficulty) {
+		this.difficulty = difficulty;
+	}
+	public Long getBestTime() {
+		return bestTime;
+	}
+
+	public void setBestTime(Long bestTime) {
+		this.bestTime = bestTime;
 	}
 }

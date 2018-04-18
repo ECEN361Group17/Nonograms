@@ -36,11 +36,6 @@ public class CurtainTile extends Tile {
 		this.gameTile = false;
 	}
 	
-	private void changeDimension(Dimension dimension)  {
-		this.tile.setPreferredSize(dimension);
-		this.tile.repaint();
-	}
-	
 	public void setText(String text)  {
 		((JLabel) this.tile).setText(text.toString());
 		((JLabel) this.tile).setToolTipText(text.toString());

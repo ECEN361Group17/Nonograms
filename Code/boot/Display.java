@@ -47,13 +47,27 @@ public class Display {
 	private JLabel bestTimeLabel;
 	private JButton menuButton;
 	
+	private String difficulty;
+	private JPanel startPanel;
+	
 	public Display()  {
+		frame = new JFrame("Nonograms");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		init();
+	}
+	public Display(JFrame frame)  {
+		this.frame = frame;
+		init();
+	}
+	public Display(JFrame frame, String difficulty, JPanel startPanel)  {
+		this.frame = frame;
+		this.difficulty = difficulty;
+		this.startPanel = startPanel;
 		init();
 	}
 	
 	private void init()  {
-		frame = new JFrame("Nonograms");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		frame.setBackground(Color.DARK_GRAY);
 		frame.setPreferredSize(new Dimension(1040, 800));
 		
@@ -72,7 +86,28 @@ public class Display {
 		menuButton.setBackground(Color.BLACK);
 		menuButton.setBorderPainted(false);
 		menuButton.setFocusPainted(false);
+		menuButton.setToolTipText("Menu");
 		menuButton.addMouseListener(new menuButtonListener());
+		
+		
+		JPanel menuPanel = new JPanel(new BorderLayout());
+		menuPanel.setBackground(Color.BLACK);
+		
+		JButton backButton = new JButton();
+		backButton.setBackground(Color.BLACK);
+		backButton.setPreferredSize(new Dimension(50, 50));
+		backButton.setFocusPainted(false);
+		backButton.setBorderPainted(false);
+		backButton.setToolTipText("Back");
+		backButton.addActionListener(new ActionListener()  {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				frame.setContentPane(startPanel);			
+			}
+			
+		});
 		
 		try {
 			Image menuIcon = ImageIO.read(new File("images/menuIcon.png"));
@@ -81,13 +116,29 @@ public class Display {
 			System.out.println(ex);
 		}
 		
+		try {
+			Image backIcon = ImageIO.read(new File("images/backButton.png"));
+			backButton.setIcon(new ImageIcon(backIcon.getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH)));
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+		
 		startTime = System.currentTimeMillis();
 		gameTimer = new GameTimer(startTime);
-		menuBar.add(menuButton, BorderLayout.WEST);
 		menuBar.add(gameTimer, BorderLayout.EAST);
 		
 		FileListReader flr = new FileListReader("Puzzles/");
-		filePath = flr.getRandomFile();
+		
+		if(difficulty.equals("EASY"))  {
+			filePath = flr.getRandomFile(flr.getEasyFileList());
+			System.out.println(filePath);
+		}
+		else if(difficulty.equals("HARD"))  {
+			filePath = flr.getRandomFile(flr.getHardFileList());
+		}
+		else  {
+			filePath = flr.getRandomFile();
+		}
 		
 		PuzzleReader pr = new PuzzleReader(filePath);
 		PuzzleReader prGameFile = new PuzzleReader(filePath);
@@ -107,6 +158,9 @@ public class Display {
 			bestTimeLabel.setText("                           best time     " + createTime(gameGrid.getBestTime()));
 		}
 		
+		menuPanel.add(menuButton, BorderLayout.WEST);
+		menuPanel.add(backButton, BorderLayout.CENTER);
+		menuBar.add(menuPanel, BorderLayout.WEST);
 		menuBar.add(bestTimeLabel, BorderLayout.CENTER);
 		
 		gridPanel.removeAll();
@@ -324,7 +378,7 @@ public class Display {
 							
 							menuPopup.show(menuButton, 0, 28);
 						}
-						//System.out.println(e.getKeyCode());
+						
 		    	  }
 		    	  
 		        return false;
@@ -334,12 +388,26 @@ public class Display {
 	
 	private void newGame()  {
 		FileListReader flr = new FileListReader("Puzzles/");
-		String temp = flr.getRandomFile();
+		String temp[];
+		String s = flr.getRandomFile();
 		
-		while(temp.equals(filePath))  {
-			temp = flr.getRandomFile();
+		if(difficulty.equals("EASY"))  {
+			temp = flr.getEasyFileList();
+			s = flr.getRandomFile(temp);
 		}
-		filePath = temp;
+		else if(difficulty.equals("HARD"))  {
+			temp = flr.getHardFileList();
+			s = flr.getRandomFile(temp);
+		}
+		else  {
+			temp = flr.getFileList();
+			s = flr.getRandomFile(temp);
+		}
+		
+		while(s.equals(filePath))  {
+			s = flr.getRandomFile(temp);
+		}
+		filePath = s;
 		
 		PuzzleReader pr = new PuzzleReader(filePath);
 		PuzzleReader prGameFile = new PuzzleReader(filePath);
@@ -430,7 +498,6 @@ public class Display {
 		newGame.setBackground(Color.BLACK);
 		newGame.setForeground(Color.ORANGE);
 		newGame.setFont(new Font("Impact", Font.PLAIN, 20));
-		//newGame.setBorderPainted(false);
 		newGame.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.DARK_GRAY));
 		newGame.setFocusPainted(false);		
 		newGame.setFocusable(false);
@@ -441,7 +508,6 @@ public class Display {
 		restart.setBackground(Color.BLACK);
 		restart.setForeground(Color.ORANGE);
 		restart.setFont(new Font("Impact", Font.PLAIN, 20));
-		//restart.setBorderPainted(false);
 		restart.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.DARK_GRAY));
 		restart.setFocusPainted(false);		
 		restart.setFocusable(false);
@@ -452,7 +518,6 @@ public class Display {
 		exit.setBackground(Color.BLACK);
 		exit.setForeground(Color.ORANGE);
 		exit.setFont(new Font("Impact", Font.PLAIN, 20));
-		//exit.setBorderPainted(false);
 		exit.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.DARK_GRAY));
 		exit.setFocusPainted(false);		
 		exit.setFocusable(false);

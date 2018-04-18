@@ -1,5 +1,6 @@
 package boot;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -12,6 +13,11 @@ import javax.swing.Timer;
 
 class GameTimer extends JPanel implements ActionListener {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private Timer timer;
 	private JLabel timerLabel;
 	private long startTime;
@@ -19,11 +25,13 @@ class GameTimer extends JPanel implements ActionListener {
 	public GameTimer(long startTime)  {
 		this.startTime = startTime;
 		
+		this.setLayout(new BorderLayout());
+		
 		timerLabel = new JLabel(createTime());
 		timerLabel.setFont(new Font("Impact", Font.PLAIN, 14));
 		timerLabel.setForeground(Color.WHITE);
 		timerLabel.setPreferredSize(new Dimension(75,20));
-		add(timerLabel);
+		add(timerLabel, BorderLayout.WEST);
 		setBackground(Color.BLACK);
 		
 		timer = new Timer(1000, (ActionListener) this);
