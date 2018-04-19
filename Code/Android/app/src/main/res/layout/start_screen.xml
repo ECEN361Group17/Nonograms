@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#404040"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="315dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <Spinner
+        android:id="@+id/difficultySpinner"
+        android:layout_width="250dp"
+        android:layout_height="101dp"
+        android:background="#404040"
+        android:layout_marginLeft="50dp"
+        android:padding="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo" />
+
+    <ImageButton
+        android:id="@+id/startBtn"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:adjustViewBounds="true"
+        android:layout_marginRight="50dp"
+        android:background="#404040"
+        android:padding="2dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/forward_button"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo"
+        />
+
+    <Button
+        android:id="@+id/help"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="#404040"
+        android:text="?"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</android.support.constraint.ConstraintLayout>
